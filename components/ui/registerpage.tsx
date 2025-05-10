@@ -18,12 +18,26 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { useRouter } from "next/navigation"
-
+import { useSession, signIn, signOut } from "next-auth/react"
 export default function Registerpage() {
   const router = useRouter()
-
+const session = useSession()
+console.log(session)
   const handleSignIn = () => {
     router.push('/dashboard')
+    // signIn("google")
+  }
+  const loginwithgoogle = () => {
+    signIn("google")
+  }
+  // if(session.status === "authenticated"){
+  //   router.push('/dashboard')
+  // }
+  if(session.status === "loading"){
+    return <div>Loading...</div>
+  }
+  if(session.status === "unauthenticated"){
+    return <div>unauthenticated</div>
   }
 
   const handleSignUp = () => {
@@ -54,9 +68,12 @@ export default function Registerpage() {
                 <Label htmlFor="username">password</Label>
                 <Input id="username" defaultValue="@peduarte" />
               </div>
-            </CardContent>
+            </CardContent> 
             <CardFooter>
-              <Button className="cursor-pointer" onClick={handleSignIn}>sign in</Button>
+              <div className="flex justify-center gap-2">
+                <Button className="cursor-pointer" onClick={handleSignIn}>sign in</Button>
+                <Button className="cursor-pointer" onClick={loginwithgoogle}>log in with google</Button>
+              </div>
             </CardFooter>
           </Card>
         </TabsContent>
