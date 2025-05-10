@@ -1,3 +1,4 @@
+"use client"
 import { AppSidebar } from "@/components/ui/appsidebar"
 import {
   Breadcrumb,
@@ -23,7 +24,8 @@ import ChartArea from "@/components/ui/chartarea"
 import ChartPi from "@/components/ui/chartpi"
 import Component from "@/components/ui/linechart"
 import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
+import { Plus, LogOut } from "lucide-react"
+import { signOut } from "next-auth/react"
 export default function DashboardPage() {
   return (
     <SidebarProvider>
@@ -50,6 +52,14 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon" className="rounded-full" >
               <Plus />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="rounded-full"
+              onClick={() => signOut({ callbackUrl: '/' })}
+            >
+              <LogOut className="h-4 w-4" />
             </Button>
           <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

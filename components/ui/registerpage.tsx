@@ -30,14 +30,11 @@ console.log(session)
   const loginwithgoogle = () => {
     signIn("google")
   }
-  // if(session.status === "authenticated"){
-  //   router.push('/dashboard')
-  // }
+  if(session.status === "authenticated"){
+    router.push('/dashboard')
+  }
   if(session.status === "loading"){
     return <div>Loading...</div>
-  }
-  if(session.status === "unauthenticated"){
-    return <div>unauthenticated</div>
   }
 
   const handleSignUp = () => {
