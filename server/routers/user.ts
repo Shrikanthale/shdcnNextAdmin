@@ -40,6 +40,21 @@ export const userRouter = router({
         return await prisma.user.delete({
             where : {id : input.id}
         })
-    })
+    }),
+
+    updateUser : procedure.input(z.object({
+        id : z.number(),
+        name : z.string(),
+        surname : z.string()
+    })).mutation(async (opts)=>{
+        const {input} = opts
+        return await prisma.user.update({
+            where : {id : input.id},
+            data : {
+                name : input.name,
+                surname : input.surname
+            }
+        })
+    })      
 })
 
